@@ -6,7 +6,7 @@ from clarity.predict_visibility import predict_visibility
 from utils.space_api import get_cloud_cover, get_iss_pass, get_moon_phase, get_light_pollution
 from scheduler.event_scanner import TODAY_EVENTS
 from explainer.gemini_explainer import generate_celestial_explanation
-
+import os
 app = Flask(__name__)
 
 # ==========================
