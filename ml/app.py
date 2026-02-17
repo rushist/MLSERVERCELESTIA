@@ -80,10 +80,8 @@ def explain_event():
     })
 # ==========================
 # RUN SERVER
-# ==========================
+start_scheduler()
+
 if __name__ == "__main__":
-    threading.Thread(target=start_scheduler, daemon=True).start()
-
-    port = int(os.environ.get("PORT", 8000))
-
-    app.run(host="0.0.0.0", port=port, debug=False)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
