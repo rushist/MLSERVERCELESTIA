@@ -11,12 +11,15 @@ N2YO_API_KEY = os.getenv("N2YL_API_KEY")
 
 def get_cloud_cover(lat, lon):
 
-    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&hourly=cloud_cover"
-    res = requests.get(url).json()
+    try:
+        url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&hourly=cloud_cover"
+        res = requests.get(url, timeout=10).json()
 
-    cloud_cover = res["hourly"]["cloud_cover"][0]
-
-    return cloud_cover
+        cloud_cover = res["hourly"]["cloud_cover"][0]
+        return cloud_cover
+    except (KeyError, IndexError, requests.RequestException, ValueError):
+        # Return a neutral default if the API is unavailable or returns unexpected data
+        return 50
 
 
 def get_iss_pass(lat, lon):
